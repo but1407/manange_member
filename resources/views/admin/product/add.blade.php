@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form action="" method="POST">
+    <form action="{{ route('upload.service') }}" method="POST" enctype="multipart/form-data">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 <label for="menu">Ảnh Sản Phẩm</label>
-                <input type="file" class="form-control" id="upload">
+                <input type="file" class="form-control" id="upload" name="upload">
                 <div id="image_show">
 
                 </div>

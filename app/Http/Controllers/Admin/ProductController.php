@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Services\Product\ProductService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,26 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+    protected $productService;
+
+    public function __construct(ProductService $productService)
     {
-        //
+        $this->productService = $productService;
+    }
+
+
+    public function index($id = '', $slug = '')
+    {
+        $product = $this->productService->show($id);
+        $productsMore = $this->productService->more($id);
+
+        return view('products.content', [
+            'title' => $product->name,
+            'product' => $product,
+            'products' => $productsMore
+        ]);
     }
 
     /**
